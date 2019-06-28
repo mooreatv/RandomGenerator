@@ -87,7 +87,6 @@ StaticPopupDialogs["DYNBOXER_RANDOM"] = {
   hideOnEscape = 1, -- doesn't help when there is an edit box, real stuff is:
   EditBoxOnEscapePressed = function(self)
     self:GetParent():Hide()
-    self:GetParent().editBox:SetMaxLetters(0)
   end,
   OnHide = DB.OnRandomUIHide,
   OnShow = DB.OnRandomUIShow,
