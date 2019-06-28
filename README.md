@@ -1,4 +1,4 @@
-# Random
+# Random Generator
 
 This World of Warcraft addon lets you generate random tokens to copy paste as needed.
 
