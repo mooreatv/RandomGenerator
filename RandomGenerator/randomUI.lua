@@ -8,21 +8,7 @@
 local addon, ns = ...
 
 -- Created by MoLib
-local DB = DynBoxer
-
-function DB.OnUICancel(widget, _data)
-  DB.enabled = false -- avoids a loop where we keep trying to ask user
-  DB.inUI = false
-  widget:Hide()
-  widget.editBox:SetMaxLetters(0)
-  DB:Error("User cancelled. Will not use DynamicBoxer until /reload or /dbox i")
-end
-
-function DB.OnShowUICancel(widget, _data)
-  DB.inUI = false
-  widget:Hide()
-  DB:Warning("Escaped/cancelled from UI show (use <return> key to close normally when done copy pasting)")
-end
+local DB = _G[addon]
 
 DB.fontPath = "Interface\\AddOns\\DynamicBoxer\\fixed-font.otf"
 
@@ -38,9 +24,11 @@ end
 
 -- local x = 0
 
-DB.fontString = DB:CreateFontString()
+DB.frame = CreateFrame("Frame")
+DB.fontString = DB.frame:CreateFontString()
 
 function DB.OnRandomUIShow(widget, _data)
+  DB.debug = randomSaved.debug
   DB:Debug("Randomize UI Show/Regen")
   local e = widget.editBox
   DB.randomEditBox = e
@@ -83,7 +71,7 @@ function DB.OnRandomUIShow(widget, _data)
 end
 
 StaticPopupDialogs["DYNBOXER_RANDOM"] = {
-  text = "RandomGenerator random token to copy and paste",
+  text = "Random token for you to copy and paste",
   button1 = "Randomize",
   button2 = "Close",
   timeout = 0,
@@ -109,9 +97,8 @@ StaticPopupDialogs["DYNBOXER_RANDOM"] = {
 }
 
 function DB:RandomGeneratorUI()
-  -- TODO: cleanup/move to its own addon (Issue #11)
+  -- TODO: cleanup/move to its own addon (DynamicBoxer Issue #11)
   StaticPopup_Show("DYNBOXER_RANDOM")
 end
 
-
-DB:Debug("random ui file loaded")
+DB:Print("RandomGenerator " .. DB.manifestVersion .. " by MooreaTv: type /rand help for command list/help.")

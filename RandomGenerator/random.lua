@@ -14,10 +14,12 @@ local addon, ns = ...
 -- Created by MoLib
 local DB = _G[addon]
 
+DB.randomIdLen = 8 -- we generate 8 characters long random ids
+randomSaved = {}
+
 function DB:Help(msg)
   DB:Print("Random: " .. msg .. "\n" .. "/rand -- display random token dialog\n" ..
-             "/rand debug on/off/level -- for debugging on at level or off.\n" ..
-             "/rand version -- shows addon version")
+             "/rand debug on/off/level -- for debugging on at level or off.\n" .. "/rand version -- shows addon version")
 end
 
 function DB:SetSaved(name, value)
@@ -28,7 +30,8 @@ end
 
 function DB.Slash(arg) -- can't be a : because used directly as slash command
   if #arg == 0 then
-    DB:Help("commands")
+    -- random id generator (misc bonus util)
+    DB:RandomGeneratorUI()
     return
   end
   DB:Debug("Got slash cmd: %", arg)
@@ -40,10 +43,7 @@ function DB.Slash(arg) -- can't be a : because used directly as slash command
   end
   if cmd == "v" then
     -- version
-    DB:Print("DynamicBoxer " .. DB.manifestVersion .. " by MooreaTv")
-  elseif cmd == "r" then
-    -- random id generator (misc bonus util)
-    DB:RandomGeneratorUI()
+    DB:Print("RandomGenerator " .. DB.manifestVersion .. " by MooreaTv")
   elseif DB:StartsWith(arg, "debug") then
     -- debug
     if rest == "on" then
