@@ -1,13 +1,6 @@
-<img src="https://raw.githubusercontent.com/mooreatv/DynamicBoxer/master/DynamicBoxer.png" height=150 width=150 align=right>
+# Random
 
-# DynamicBoxer
+This World of Warcraft addon lets you generate random tokens to copy paste as needed.
 
-The way [ISBoxer](http://isboxer.com/wiki/WoW:Quicker_Start_Guide) works currently is you need to go back outside of the game into the windows isboxer suite program each time you want to create a new character or change whichever combination of characters you may want to be multi-boxing with at the time.
+This originally was a utility part of [DynamicBoxer](https://www.curseforge.com/wow/addons/dynamicboxer)
 
-This addon allows you to create only 1 team per layout and dynamically load any characters you wish into it
-
-Likewise it lets you create new characters and teams dynamically without having to go back to isboxer suite, make changes there and export to innerspace
-
-This is quite important for instance in classic when you can't create your teams ahead of time and want to get going asap with your teams
-
-Get the binary release using curse client or on https://www.curseforge.com/wow/addons/dynamicboxer or on [WowInterface](https://www.wowinterface.com/downloads/info25009-DynamicBoxer.html)

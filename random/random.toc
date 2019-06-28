@@ -1,0 +1,12 @@
+## Interface: 80200
+## Title: Random
+## Notes: Type /rand to get random tokens to copy paste
+## Author: MooreaTV moorea@ymail.com
+## Version: @project-version@
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables:  randomSaved
+## Globe: check-classic
+MoLib/MoLib.lua
+random.lua
+randomUI.lua
