@@ -5,18 +5,18 @@
   (contact the author if you need a different license)
 ]] --
 -- our name, our empty default (and unused) anonymous ns
-local addon, ns = ...
+local addon = ...
 
 -- Created by MoLib
 local DB = _G[addon]
 
-DB.fontPath = "Interface\\AddOns\\DynamicBoxer\\fixed-font.otf"
+DB.fontPath = "Interface\\AddOns\\RandomGenerator\\fixed-font.otf"
 
 function DB:SetupFont(height)
   if DB.fixedFont then
     return DB.fixedFont
   end
-  DB.fixedFont = CreateFont("DynBoxerFixedFont")
+  DB.fixedFont = CreateFont("RandomGeneratorFixedFont")
   DB:Debug("Set font custom height %, path %: %", height, DB.fontPath, DB.fixedFont:SetFont(DB.fontPath, height))
   -- DB:Debug("Set font system: %", DB.fixedFont:SetFont(CombatTextFont:GetFont(), 10))
   return DB.fixedFont
@@ -49,6 +49,9 @@ function DB.OnRandomUIShow(widget, _data)
   e:HighlightText()
   e:SetJustifyH("CENTER")
   local font = DB:SetupFont(height / 2)
+  if not DB.originalFont then
+    DB.originalFont = e:GetFontObject()
+  end
   e:SetFontObject(font)
   DB.fontString:SetFontObject(font)
   DB.fontString:SetText(newText)
@@ -56,18 +59,23 @@ function DB.OnRandomUIShow(widget, _data)
   DB:Debug("Width with new font is %", width)
   e:SetWidth(width + 4) -- + some or highlights hides most of it/it doesn't fit
   e:SetMaxLetters(DB.randomIdLen)
-  e:SetScript("OnTabPressed", function()
-    DB:Debug("Tab pressed on random, switching!")
-    if DB.currentMainEditBox then
-      DB.currentMainEditBox:SetFocus()
-    end
-  end)
   e:SetScript("OnMouseUp", function(w)
     DB:Debug("Clicked on random, re-highlighting")
     w:HighlightText()
     w:SetCursorPosition(DB.randomIdLen)
   end)
   return true -- stay shown
+end
+
+function DB.OnRandomUIHide(widget, _data)
+  DB:Debug("Undoing change to edit box")
+  local e = widget.editBox
+  -- quite stupid IMNSHO that those dialogs don't reset themselves...
+  e:SetText("")
+  e:SetJustifyH("LEFT")
+  e:SetFontObject(DB.originalFont)
+  e:SetMaxLetters(0)
+  e:SetScript("OnMouseUp", nil)
 end
 
 StaticPopupDialogs["DYNBOXER_RANDOM"] = {
@@ -81,6 +89,7 @@ StaticPopupDialogs["DYNBOXER_RANDOM"] = {
     self:GetParent():Hide()
     self:GetParent().editBox:SetMaxLetters(0)
   end,
+  OnHide = DB.OnRandomUIHide,
   OnShow = DB.OnRandomUIShow,
   OnAccept = DB.OnRandomUIShow,
   EditBoxOnEnterPressed = function(self, data)
@@ -97,7 +106,6 @@ StaticPopupDialogs["DYNBOXER_RANDOM"] = {
 }
 
 function DB:RandomGeneratorUI()
-  -- TODO: cleanup/move to its own addon (DynamicBoxer Issue #11)
   StaticPopup_Show("DYNBOXER_RANDOM")
 end
 

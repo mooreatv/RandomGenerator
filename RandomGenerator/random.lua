@@ -9,7 +9,7 @@
    ]] --
 --
 -- our name, our empty default (and unused) anonymous ns
-local addon, ns = ...
+local addon = ...
 
 -- Created by MoLib
 local DB = _G[addon]
@@ -62,10 +62,10 @@ function DB.Slash(arg) -- can't be a : because used directly as slash command
   end
 end
 
-SlashCmdList["Random_Slash_Command"] = DB.Slash
+SlashCmdList["RandomGenerator_Slash_Command"] = DB.Slash
 
-SLASH_Random_Slash_Command1 = "/rand"
-SLASH_Random_Slash_Command2 = "/random"
+SLASH_RandomGenerator_Slash_Command1 = "/rand"
+SLASH_RandomGenerator_Slash_Command2 = "/random"
 
 -- DB.debug = 2
 DB:Debug("random generator main file loaded")

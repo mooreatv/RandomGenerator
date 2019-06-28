@@ -1,9 +1,8 @@
-package-as: DynamicBoxer
+package-as: RandomGenerator
 
 ignore:
-    - installdb.bat
-    - DynamicBoxer.png
-    - DynamicBoxer/luaformat.cfg
+    - installrnd.bat
+    - RandomGenerator_sshot.png
     - MoLib/installmolib.bat
     - MoLib/MoLib.toc
     - MoLib/luaformat.cfg
@@ -17,6 +16,6 @@ externals:
         url: https://github.com/mooreatv/MoLib
 
 move-folders:
-  DynamicBoxer/DynamicBoxer: DynamicBoxer
+  RandomGenerator/RandomGenerator: RandomGenerator
 
 enable-nolib-creation: no
